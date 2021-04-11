@@ -93,6 +93,55 @@ client.on("message", async message => {
   }
 });
 
+//welcome
+client.on("guildMemberAdd", async (member) => {
+
+  let guild = client.guilds.cache.get("790937909691023380"); //id do servidor
+  let channel = client.channels.cache.get("791004302075494450"); // id do canal
+  let emoji = member.guild.emojis.cache.find(emoji => emoji.name === "welcomeglitch"); //nome do emoji no servidor
+  let emoji2 = member.guild.emojis.cache.find(emoji => emoji.name === "heartbeat_anim")
+  if (guild != member.guild) {
+    return console.log("Sem boas-vindas pra você!");
+  }
+  else {
+    let embed = new Discord.MessageEmbed()
+      .setColor("#7F06FC")
+      .setAuthor(member.user.tag, member.user.displayAvatarURL())
+      .setTitle(`${emoji} Boas-vindas ${emoji}`)
+      .setImage("https://i.imgur.com/CySXJDb.gif")
+      .setDescription(`**${member.user}**, bem-vindo(a) ao servidor **${guild.name}**! Atualmente estamos com **${member.guild.memberCount} membros**, divirta-se conosco! ${emoji2}`)
+      .addField('👔 Cargos!', 'Saiba um pouco melhor como funciona o sistema de cargos em: <#790938491378597969>')
+      .addField('👮 Evite punições!', 'Leia as nossas <#790938442804101150> para evitar ser punido no servidor!')
+      .addField('📛 Precisando de ajuda?', 'Caso você tenha alguma dúvida ou problema, abra um ticket em: <#790987045471649834>')
+      .setThumbnail(member.user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }))
+      .setFooter('🛡 ID do usuário: ' + member.user.id)
+      .setTimestamp();
+
+    await channel.send(embed);
+  }
+});
+
+//leave
+client.on("guildMemberRemove", async (member) => {
+  let guild = client.guilds.cache.get("790937909691023380"); //id do servidor
+  let channel = client.channels.cache.get("790941745709187092"); // id do canal
+  let emoji = member.guild.emojis.cache.find(emoji => emoji.name === "SataniaCry"); //nome do emoji no servidor
+  if (guild != member.guild) {
+    return console.log("Sem boas-vindas pra você! Sai daqui saco pela.");
+  }
+  else {
+    let embed = new Discord.MessageEmbed()
+      .setColor("#FF0000")
+      .setAuthor(member.user.tag, member.user.displayAvatarURL())
+      .setTitle(`${emoji} Espero que volte logo ${emoji}`)
+      .setDescription(`**${member.user}**, acaba de sair de **${guild.name}**!`)
+      .setThumbnail(member.user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }))
+      .setFooter('🛡 ID do usuário: ' + member.user.id)
+      .setTimestamp();
+
+    await channel.send(embed);
+  }
+});
 // Status 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.username}!`);
