@@ -1,0 +1,10 @@
+{
+  "prefix": "h!",
+  	"servers": [
+		"790937909691023380" //id do servidor
+	],
+	"roleID": "808751995758051328", //id da role
+	"colors": 24, //quantidade de cores
+	"speed": 120000, //tempo, não mexer
+	"logging": true
+}
